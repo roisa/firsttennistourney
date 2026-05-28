@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our First Tournament · Doubles Game Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1e2b1c;
+    --court:#2f6b3a;
+    --court-deep:#1c4426;
+    --sun:#ffb347;
+    --sun-deep:#f08a24;
+    --cream:#fdf6e9;
+    --line:#f4ead4;
+    --shadow:rgba(28,40,22,.18);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Outfit',sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(120% 80% at 80% -10%, #ffe1a8 0%, rgba(255,225,168,0) 55%),
+      radial-gradient(90% 70% at -10% 0%, #ffd089 0%, rgba(255,208,137,0) 50%),
+      linear-gradient(180deg,#fff4dd 0%, var(--cream) 30%);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 22px 80px}
+
+  /* HERO */
+  header{
+    padding:64px 0 40px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .sun-orb{
+    position:absolute;top:-60px;left:50%;transform:translateX(-50%);
+    width:200px;height:200px;border-radius:50%;
+    background:radial-gradient(circle,var(--sun) 0%,var(--sun-deep) 60%,rgba(240,138,36,0) 72%);
+    filter:blur(4px);opacity:.55;
+    animation:rise 1.6s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes rise{from{transform:translateX(-50%) translateY(40px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:.55}}
+  .kicker{
+    position:relative;
+    font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--sun-deep);font-weight:600;margin-bottom:14px;
+    animation:fade .8s .2s both;
+  }
+  h1{
+    position:relative;
+    font-family:'Fraunces',serif;font-weight:900;
+    font-size:clamp(2.6rem,9vw,4.4rem);line-height:.98;
+    letter-spacing:-.02em;color:var(--court-deep);
+    animation:fade .9s .3s both;
+  }
+  h1 em{font-style:italic;color:var(--sun-deep)}
+  .sub{
+    position:relative;margin-top:18px;font-size:1.05rem;color:#5a6354;
+    max-width:440px;margin-left:auto;margin-right:auto;
+    animation:fade .9s .45s both;
+  }
+  .badge{
+    display:inline-block;margin-top:24px;padding:8px 18px;
+    background:var(--court);color:#fff;border-radius:100px;
+    font-size:.82rem;font-weight:500;letter-spacing:.04em;
+    box-shadow:0 8px 20px var(--shadow);
+    animation:fade .9s .6s both;
+  }
+  @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+  /* SECTIONS */
+  section{margin-top:46px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}
+  .num{
+    font-family:'Fraunces',serif;font-weight:900;font-size:2.4rem;
+    color:var(--sun-deep);line-height:1;flex-shrink:0;
+  }
+  .sec-head h2{
+    font-family:'Fraunces',serif;font-weight:600;font-size:1.6rem;
+    color:var(--court-deep);letter-spacing:-.01em;line-height:1.1;
+  }
+  .prog{
+    margin-left:auto;align-self:center;flex-shrink:0;
+    font-family:'Outfit';font-size:.78rem;font-weight:600;
+    color:var(--court);background:rgba(47,107,58,.1);
+    padding:4px 12px;border-radius:100px;transition:all .25s ease;
+  }
+  .prog.done{background:var(--court);color:#fff}
+
+  .card{
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(6px);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:8px 6px;
+    box-shadow:0 14px 40px -22px var(--shadow);
+  }
+  ul{list-style:none}
+  li{
+    display:flex;gap:14px;padding:15px 18px;
+    border-bottom:1px solid #f0e6cf;
+  }
+  li:last-child{border-bottom:none}
+  .dot{
+    flex-shrink:0;width:22px;height:22px;border-radius:50%;
+    background:var(--court);color:#fff;font-size:.72rem;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:3px;
+  }
+  .sun-sec .dot{background:var(--sun-deep)}
+  li b{color:var(--court-deep);font-weight:600}
+  .sun-sec li b{color:var(--sun-deep)}
+
+  /* CHECKLISTS */
+  .check{padding:0}
+  .check label{
+    display:flex;gap:14px;align-items:flex-start;width:100%;
+    padding:15px 18px;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .check input{position:absolute;opacity:0;width:0;height:0}
+  .check .box{
+    flex-shrink:0;width:24px;height:24px;border-radius:8px;
+    border:2px solid var(--court);background:#fff;margin-top:1px;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .18s ease,border-color .18s ease;
+  }
+  .check .box::after{
+    content:'';width:6px;height:11px;margin-bottom:2px;
+    border:solid #fff;border-width:0 3px 3px 0;
+    transform:rotate(45deg) scale(.4);opacity:0;
+    transition:opacity .18s ease,transform .18s ease;
+  }
+  .check input:checked + .box{background:var(--court);border-color:var(--court)}
+  .check input:checked + .box::after{opacity:1;transform:rotate(45deg) scale(1)}
+  .check input:focus-visible + .box{outline:3px solid var(--sun);outline-offset:2px}
+  .check .txt{transition:color .18s ease}
+  .check input:checked ~ .txt{color:#a8a290;text-decoration:line-through;text-decoration-color:rgba(168,162,144,.55)}
+  .check input:checked ~ .txt b{color:#a8a290}
+
+  .lede{
+    font-size:.97rem;color:#5a6354;padding:0 4px 18px;
+  }
+  .note{
+    font-size:.85rem;color:#9a9483;padding:4px 18px 14px;
+    display:flex;align-items:center;gap:7px;
+  }
+  .note::before{content:'💾';font-size:.95rem}
+
+  /* MANTRA */
+  .mantra{
+    margin-top:54px;text-align:center;
+    background:linear-gradient(135deg,var(--court) 0%,var(--court-deep) 100%);
+    color:#fff;border-radius:24px;padding:40px 30px;
+    box-shadow:0 20px 50px -20px rgba(28,68,38,.6);
+  }
+  .mantra p{font-family:'Fraunces',serif;font-style:italic;font-size:1.5rem;line-height:1.35}
+  .mantra span{display:block;margin-top:16px;font-family:'Outfit';font-style:normal;
+    font-size:.8rem;letter-spacing:.28em;text-transform:uppercase;opacity:.75}
+
+  .reset-wrap{text-align:center;margin-top:36px}
+  #reset{
+    font-family:'Outfit';font-size:.85rem;color:#9a9483;
+    background:none;border:1px solid var(--line);
+    padding:9px 20px;border-radius:100px;cursor:pointer;
+    transition:color .18s ease,border-color .18s ease,background .18s ease;
+  }
+  #reset:hover{color:#c1502f;border-color:#e7c9bc;background:rgba(216,90,60,.05)}
+
+  footer{text-align:center;margin-top:40px;font-size:.85rem;color:#9a9483}
+  .heart{color:var(--sun-deep)}
+
+  /* DO / DON'T */
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.dd{grid-template-columns:1fr}}
+  .dd .col{
+    border-radius:20px;padding:6px 4px;
+    border:1px solid var(--line);
+    box-shadow:0 14px 40px -24px var(--shadow);
+  }
+  .dd .do{background:rgba(47,107,58,.07)}
+  .dd .dont{background:rgba(216,90,60,.07)}
+  .dd .col h3{
+    font-family:'Fraunces',serif;font-weight:600;font-size:1.1rem;
+    padding:16px 18px 4px;display:flex;align-items:center;gap:8px;
+  }
+  .dd .do h3{color:var(--court-deep)}
+  .dd .dont h3{color:#c1502f}
+  .dd ul li{padding:11px 18px;font-size:.95rem;border-bottom:1px solid rgba(0,0,0,.05)}
+  .dd .col ul li:last-child{border-bottom:none}
+  .dd .mk{flex-shrink:0;font-weight:700;margin-top:1px}
+  .dd .do .mk{color:var(--court)}
+  .dd .dont .mk{color:#d85a3c}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="sun-orb"></div>
+    <p class="kicker">Tomorrow · 8:00 AM</p>
+    <h1>Our First<br><em>Tournament</em></h1>
+    <p class="sub">Women's beginner doubles. We're here to have fun, play smart, and walk off the court grinning — together.</p>
+    <span class="badge">🎾 Game plan for two</span>
+  </header>
+
+  <section data-list="pack">
+    <div class="sec-head"><span class="num">01</span><h2>What to pack</h2><span class="prog" data-prog="pack"></span></div>
+    <div class="card">
+      <p class="lede" style="padding:16px 18px 4px;">Lay it all out tonight so the morning is calm. Tap each item as it goes in the bag.</p>
+      <p class="note">Your progress saves on this device automatically — no login, no account.</p>
+      <ul>
+        <li class="check"><label><input type="checkbox" data-key="pack-rackets"><span class="box"></span><span class="txt"><b>2 rackets each</b> — strings break at the worst moment. A backup means we keep playing.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="pack-balls"><span class="box"></span><span class="txt"><b>A fresh can of balls</b> — for warming up, and in case our court needs them.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="pack-shoes"><span class="box"></span><span class="txt"><b>Court shoes + spare socks</b> — dry socks between matches feel amazing.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="pack-cap"><span class="box"></span><span class="txt"><b>Cap or visor + sunglasses</b> — the 8 AM sun sits right at eye level.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="pack-sunscreen"><span class="box"></span><span class="txt"><b>Sunscreen (SPF 30+)</b> — morning sun still burns over a long match.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="pack-layers"><span class="box"></span><span class="txt"><b>A light layer / jacket</b> — early courts can be chilly before we warm up.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="pack-water"><span class="box"></span><span class="txt"><b>2 big water bottles</b> — freeze one overnight so it's cold by midday.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="pack-electrolytes"><span class="box"></span><span class="txt"><b>Electrolyte tablets or drink</b> — for the sun and back-to-back matches.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="pack-snacks"><span class="box"></span><span class="txt"><b>Snacks</b> — bananas, bars, trail mix (see the fuel list below).</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="pack-towel"><span class="box"></span><span class="txt"><b>A sweat towel</b> — and a hair tie or sweatband to keep hair out of our eyes.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="pack-firstaid"><span class="box"></span><span class="txt"><b>Mini first-aid kit</b> — blister plasters, athletic tape, a couple of ibuprofen.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="pack-info"><span class="box"></span><span class="txt"><b>Registration info + court assignment</b> — saved on a phone or printed, so check-in is quick.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="pack-phone"><span class="box"></span><span class="txt"><b>Phone + power bank</b> — and a little cash or card for fees, parking, or coffee.</span></label></li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-list="fuel">
+    <div class="sec-head"><span class="num">02</span><h2>Fuel &amp; snacks</h2></div>
+    <div class="card">
+      <p class="lede" style="padding:16px 18px 4px;">Eat to feel light and energized, not stuffed. Stick to foods we already know agree with us — tournament morning is no time to try something new.</p>
+      <ul>
+        <li><span class="dot">🌙</span><span><b>The night before.</b> A carb-friendly dinner — pasta, rice, potatoes — tops up our energy stores. Drink plenty of water through the evening, and keep it familiar and not too heavy.</span></li>
+        <li><span class="dot">🍳</span><span><b>Breakfast, ~1.5–2 hrs before.</b> Something light and carby: oatmeal, a banana, toast with honey or peanut butter, yogurt. Add a little protein (an egg) if there's time. Eat early enough to digest before we play.</span></li>
+        <li><span class="dot">🍌</span><span><b>Between matches.</b> Quick, easy energy in small bites — banana, dates, pretzels, trail mix, a granola or energy bar, half a sandwich. Top up the tank, don't fill it.</span></li>
+        <li><span class="dot">💧</span><span><b>Hydration is fuel too.</b> Sip water before we feel thirsty, and add electrolytes for the sun and the back-to-back matches. Start hydrating tonight, not at 7:55 AM.</span></li>
+        <li><span class="dot">⚠️</span><span><b>Go easy on.</b> Greasy, very sugary, or high-fiber foods right before playing — they sit heavy or cause a spike-and-crash. Save the big celebration meal for after.</span></li>
+        <li><span class="dot">🥳</span><span><b>Pack a treat for after.</b> Something we'll look forward to. Win or lose, we'll have earned it.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">03</span><h2>What the morning usually looks like</h2></div>
+    <div class="card">
+      <p class="lede" style="padding:16px 18px 4px;">Beginner doubles is friendly and low-pressure — no umpires, no crowd, just a few teams sharing courts. Here's the typical flow so nothing catches us off guard:</p>
+      <ul>
+        <li><span class="dot">i</span><span><b>Arrive early — 20 to 30 minutes.</b> Check in at the desk, find which court we're on, and leave time to warm up and shake off nerves.</span></li>
+        <li><span class="dot">i</span><span><b>Short matches, played back-to-back.</b> Beginner events are usually a round-robin (everyone plays a few quick matches) or a small bracket — often short sets, first-to-X games, or timed. We may play more than one match with breaks between, so pace our energy and snacks.</span></li>
+        <li><span class="dot">i</span><span><b>Quick warm-up before each match.</b> A few minutes of gentle rallying, some volleys at the net, and a couple of practice serves. Keep warm-up balls soft and friendly.</span></li>
+        <li><span class="dot">i</span><span><b>We run our own match.</b> Spin a racket for who serves/which side, then we keep our own score and call our own lines — no referee. Announce the score out loud before every serve so everyone agrees.</span></li>
+        <li><span class="dot">i</span><span><b>Switch ends on odd games.</b> Change sides after games 1, 3, 5… Grab a sip of water at the changeover.</span></li>
+        <li><span class="dot">i</span><span><b>Handshake at the end.</b> Win or lose, meet at the net, shake hands, "good game." That's the whole ritual.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-list="warmup">
+    <div class="sec-head"><span class="num">04</span><h2>Warm-up routine</h2><span class="prog" data-prog="warmup"></span></div>
+    <div class="card">
+      <p class="lede" style="padding:16px 18px 4px;">Ten loose minutes wakes up the body, settles the nerves, and prevents pulls. Work down the list once we're on court.</p>
+      <ul>
+        <li class="check"><label><input type="checkbox" data-key="warm-pulse"><span class="box"></span><span class="txt"><b>Raise the heart rate, 3–5 min.</b> Easy jog, brisk walk, or jumping jacks until we feel a little warm.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="warm-dynamic"><span class="box"></span><span class="txt"><b>Dynamic stretches.</b> Arm circles, shoulder rolls, torso twists, leg swings, and wrist circles. Keep moving — no long static holds yet.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="warm-feet"><span class="box"></span><span class="txt"><b>Wake up the feet.</b> A few side shuffles and gentle lunges to get our split-step ready.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="warm-mini"><span class="box"></span><span class="txt"><b>Mini rally.</b> Start close inside the service line, soft and controlled, then drift back to the baseline.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="warm-ground"><span class="box"></span><span class="txt"><b>Baseline groundstrokes.</b> Rally crosscourt, find a smooth rhythm, focus on clean contact over power.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="warm-volley"><span class="box"></span><span class="txt"><b>Volleys at the net.</b> A minute each of soft, punchy volleys to get comfortable up front.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="warm-overhead"><span class="box"></span><span class="txt"><b>A few overheads &amp; lobs.</b> Practice calling "mine" and shading the sun with the free hand.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="warm-serve"><span class="box"></span><span class="txt"><b>Practice serves, both sides.</b> Dial in the toss — nudge it sideways if it lands in the sun — and get a few first serves in.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="warm-return"><span class="box"></span><span class="txt"><b>A handful of returns.</b> Have a partner serve a few so the timing isn't a surprise on point one.</span></label></li>
+        <li class="check"><label><input type="checkbox" data-key="warm-reset"><span class="box"></span><span class="txt"><b>Hydrate &amp; reset.</b> Sip water, a deep breath, fist bump — "let's have fun out there."</span></label></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">05</span><h2>Play as one team, not two players</h2></div>
+    <div class="card">
+      <ul>
+        <li><span class="dot">✓</span><span><b>Talk every single point.</b> Quick calls: "mine," "yours," "switch," "back." It feels like over-talking — it isn't. Silence is where doubles falls apart.</span></li>
+        <li><span class="dot">✓</span><span><b>Decide the middle now.</b> Balls down the center go to whoever has their forehand there. Agree before the match so we're never both reaching or both watching.</span></li>
+        <li><span class="dot">✓</span><span><b>Move together.</b> If one of us steps up, the other steps up too. Imagine a rope tying us — we shift side to side as a pair, never split far apart.</span></li>
+        <li><span class="dot">✓</span><span><b>Celebrate every point — even lost ones.</b> Fist bump, "next one," reset. No apologizing, no blaming. Confidence is contagious and so is frustration.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">06</span><h2>How beginners actually win</h2></div>
+    <div class="card">
+      <ul>
+        <li><span class="dot">✓</span><span><b>Get the ball back one more time than they do.</b> Most points at this level end on errors, not winners. Steady beats flashy. Just keep it in.</span></li>
+        <li><span class="dot">✓</span><span><b>Get the first serve in.</b> Slow it down if needed — a soft serve in play beats a big one in the net. Double faults are free points handed away.</span></li>
+        <li><span class="dot">✓</span><span><b>Aim crosscourt and deep.</b> The net is lowest in the middle and the court is longest diagonally — more margin, fewer mistakes.</span></li>
+        <li><span class="dot">✓</span><span><b>Return down the middle.</b> Splitting the opponents causes confusion (the same trap we're avoiding) and keeps the net player from poaching.</span></li>
+        <li><span class="dot">✓</span><span><b>Aim at their feet.</b> A ball at the feet is the hardest to volley. Forget the lines — target the gap and the shoelaces.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sun-sec">
+    <div class="sec-head"><span class="num">07</span><h2>Beating the 8 AM sun</h2></div>
+    <div class="card">
+      <ul>
+        <li><span class="dot">☀</span><span><b>Cap or visor + sunglasses.</b> A low morning sun sits right at eye level. A brim plus polarized lenses is the single biggest help — bring them.</span></li>
+        <li><span class="dot">☀</span><span><b>Sunscreen now, even early.</b> Morning sun still burns over a long match. Reapply at the changeover.</span></li>
+        <li><span class="dot">☀</span><span><b>Sun in your eyes? Don't fight the overhead.</b> On a high ball or lob into the sun, shade with your free hand, or just let it bounce and play it off the ground. A safe groundstroke beats a blind smash into the net.</span></li>
+        <li><span class="dot">☀</span><span><b>Tweak your serve toss.</b> If the toss goes straight into the sun, shift it slightly sideways so you're not staring into the glare at contact.</span></li>
+        <li><span class="dot">☀</span><span><b>The shaded partner takes the lobs.</b> Whoever has the sun behind them should call the high balls and overheads. Say it out loud: "I've got it."</span></li>
+        <li><span class="dot">☀</span><span><b>It's fair — we switch ends.</b> You change sides on odd games, so the bad end is shared. Note which end blinds you and plan the tougher shots for the friendly end.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">08</span><h2>Do's &amp; don'ts on court</h2></div>
+    <div class="dd">
+      <div class="col do">
+        <h3>✓ Do</h3>
+        <ul>
+          <li><span class="mk">+</span> Introduce ourselves and shake hands before we start.</li>
+          <li><span class="mk">+</span> Call the score out loud before each serve.</li>
+          <li><span class="mk">+</span> Give the benefit of the doubt on close line calls — if unsure, it's their point.</li>
+          <li><span class="mk">+</span> Wait for a point to finish before crossing behind another court.</li>
+          <li><span class="mk">+</span> Hold up and return stray balls to the right court between points.</li>
+          <li><span class="mk">+</span> Keep encouraging each other, especially after mistakes.</li>
+          <li><span class="mk">+</span> Hydrate and grab a bite between matches.</li>
+        </ul>
+      </div>
+      <div class="col dont">
+        <h3>✕ Don't</h3>
+        <ul>
+          <li><span class="mk">–</span> Argue line calls on the opponents' side — their call stands.</li>
+          <li><span class="mk">–</span> Get down on yourself or your partner out loud.</li>
+          <li><span class="mk">–</span> Blast warm-up balls — keep them soft and rally-able.</li>
+          <li><span class="mk">–</span> Go for hero winners on every ball; consistency wins here.</li>
+          <li><span class="mk">–</span> Keep playing if the score's unclear — pause and agree first.</li>
+          <li><span class="mk">–</span> Walk onto or behind a court mid-point.</li>
+          <li><span class="mk">–</span> Show up late and skip the warm-up.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="reset-wrap">
+    <button id="reset" type="button">↺ Reset checklists</button>
+  </div>
+
+  <div class="mantra">
+    <p>"Keep it simple, keep it in,<br>and have each other's backs."</p>
+    <span>That's the whole strategy</span>
+  </div>
+
+  <footer>
+    Win or lose, we did our first one together <span class="heart">♥</span><br>
+    See you on court at 8.
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var STORE_KEY = 'ftt-checklist-v1';
+
+    function load(){
+      try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }
+      catch(e){ return {}; }
+    }
+    function save(state){
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+      catch(e){ /* storage unavailable — checklist still works for the session */ }
+    }
+
+    var state = load();
+    var boxes = Array.prototype.slice.call(
+      document.querySelectorAll('input[type="checkbox"][data-key]')
+    );
+
+    boxes.forEach(function(cb){
+      cb.checked = !!state[cb.dataset.key];
+      cb.addEventListener('change', function(){
+        state[cb.dataset.key] = cb.checked;
+        save(state);
+        updateProgress();
+      });
+    });
+
+    function updateProgress(){
+      document.querySelectorAll('[data-list]').forEach(function(sec){
+        var items = sec.querySelectorAll('input[type="checkbox"][data-key]');
+        var pill = sec.querySelector('.prog');
+        if(!pill) return;
+        var done = 0;
+        items.forEach(function(i){ if(i.checked) done++; });
+        pill.textContent = done + ' / ' + items.length;
+        pill.classList.toggle('done', items.length > 0 && done === items.length);
+      });
+    }
+
+    var reset = document.getElementById('reset');
+    if(reset){
+      reset.addEventListener('click', function(){
+        if(!confirm('Clear all checklist progress?')) return;
+        state = {};
+        save(state);
+        boxes.forEach(function(cb){ cb.checked = false; });
+        updateProgress();
+      });
+    }
+
+    updateProgress();
+  })();
+</script>
+</body>
+</html>
